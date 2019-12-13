@@ -1,0 +1,41 @@
+%!PS
+% gs -g612x612 -dNOPAUSE -dBATCH -sDEVICE=pngalpha -sOutputFile=spinner%d.png spinner.ps
+% convert -delay 1 -colors 256 -dispose previous -loop 0 spinner*.png spinner.gif
+
+/psi 120 def
+/colorangle { add sin 1 add 2 div } bind def
+/beachball
+{
+    /SEGMENTS exch def
+    /RADIUS exch def
+    /i exch def
+    /halfradius RADIUS 2 div def
+    /phi 360 SEGMENTS div def
+    RADIUS dup translate
+    i phi mul rotate
+    0 phi 360 phi sub {
+	gsave
+	dup /theta exch def
+	dup 0 colorangle /red exch def
+	dup psi colorangle /green exch def
+	psi 2 mul colorangle /blue exch def
+	theta rotate
+	red green blue setrgbcolor
+	newpath
+	0 0 RADIUS 0 phi arc
+	halfradius phi cos mul 
+	halfradius phi sin mul 
+	halfradius phi phi 180 add arcn
+	halfradius 0 halfradius 180 0 arc
+	closepath
+	eofill
+	grestore
+    } for
+} bind def
+
+/segments 9 def
+0 setlinewidth
+segments 1 sub -1 0 {
+    4.25 72 mul segments beachball
+    showpage
+} for
