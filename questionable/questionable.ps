@@ -1,0 +1,152 @@
+%!PS
+
+%%
+%% questionable.org logo
+%%
+%% (c) 2000 Tony Monroe. all rights reserved.
+%%
+%% Distribution unlimited, provided that the copyright notice stays intact.
+%% 
+%% $Id: questionable.ps,v 1.1.1.1 2000/02/24 01:33:26 tony Exp $
+%%
+
+/questionbang (?!) def
+/questionbangfont /NimbusRomNo9L-Regu def
+/questionbangsize 300 def
+/questionablefont /URWAntiquaT-RegularCondensed def
+/questionablesize questionbangsize 3 div def
+/purple { 0.5 0 0.5 } def
+/green { 0 0.5 0 } def
+/strokeconst 0.015 def
+/smallersize questionablesize 2 div def
+/bigstrokewidth questionablesize strokeconst mul def
+/littlestrokewidth smallersize strokeconst mul def
+/upfudge smallersize 7 div def
+/downfudge smallersize 2 div def
+
+/pullbbox {
+        exch
+        4 -1 roll
+        add -2 div
+        3 1 roll
+        add -2 div
+} def
+
+/pullcorner {
+	exch
+	4 -1 roll
+	exch sub
+	3 1 roll
+	sub
+} def
+
+300 300 translate
+
+questionbangfont findfont questionbangsize scalefont setfont
+
+100 -1 0 {
+	gsave
+	newpath
+	0 0 moveto
+	dup 100 div sqrt sqrt setgray
+	dup 
+	dup 2 mod 1 eq { 0.1 } { -0.1 } ifelse
+	mul rotate
+	dup 2 mod 1 eq { -0.4 } { 0.4 } ifelse
+	mul 0 translate
+	questionbang true charpath pathbbox pullbbox moveto
+	questionbang show
+	grestore
+} for
+
+gsave 
+questionablefont findfont questionablesize scalefont setfont
+newpath
+0 0 moveto
+(questionable) true charpath pathbbox pullbbox 
+/qpathy exch def
+/qpathx exch def
+
+newpath
+0 0 moveto
+% (questionable) true charpath pathbbox 
+(uesnonaowe) true charpath pathbbox % trial and error.
+/qpathury exch def
+/qpathurx exch def
+/qpathlly exch def
+/qpathllx exch def
+/qpathright qpathurx qpathllx add 2 div def
+/qpathleft qpathright -1 mul def
+/qpathtop qpathury qpathlly add 2 div def
+/qpathbottom qpathtop -1 mul def
+
+
+newpath
+qpathx qpathy moveto
+bigstrokewidth setlinewidth
+1 setgray
+(questionable) true charpath stroke
+
+newpath
+purple setrgbcolor
+qpathx qpathy moveto
+(questionable) show
+grestore
+
+questionablefont findfont smallersize scalefont setfont
+
+gsave
+newpath
+0 0 moveto
+(a rather) true charpath pathbbox
+/apathury exch def
+/apathurx exch def
+/apathlly exch def
+/apathllx exch def
+/apathwidth apathurx apathllx sub def
+/apathheight apathury apathlly sub def
+
+newpath
+qpathleft qpathtop downfudge sub moveto
+0 apathheight rmoveto
+littlestrokewidth setlinewidth
+1 setgray
+(a rather) true charpath stroke
+
+newpath
+qpathleft qpathtop downfudge sub moveto
+0 apathheight rmoveto
+green setrgbcolor
+(a rather) show
+grestore
+
+gsave
+newpath
+0 0 moveto
+(organization) true charpath pathbbox
+/orgpathury exch def
+/orgpathurx exch def
+/orgpathlly exch def
+/orgpathllx exch def
+/orgpathwidth orgpathurx orgpathllx sub def
+/orgpathheight orgpathury orgpathlly sub def
+
+newpath
+qpathright qpathbottom upfudge add moveto
+orgpathwidth -1 mul
+orgpathheight -1 mul
+rmoveto
+littlestrokewidth setlinewidth
+1 setgray
+(organization) true charpath stroke
+grestore
+
+newpath
+qpathright qpathbottom upfudge add moveto
+orgpathwidth -1 mul
+orgpathheight -1 mul 
+rmoveto
+green setrgbcolor
+(organization) show
+
+showpage

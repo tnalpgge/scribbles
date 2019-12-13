@@ -1,0 +1,52 @@
+%!PS
+
+%%
+%% questionable.org logo
+%%
+%% (c) 2000 Tony Monroe. all rights reserved.
+%%
+%% Distribution unlimited, provided that the copyright notice stays intact.
+%% 
+%% $Id: questionable.ps,v 1.1.1.1 2000/02/24 01:33:26 tony Exp $
+%%
+
+/questionbang (?!) def
+/questionbangfont /NimbusRomNo9L-Regu def
+/questionbangsize 300 def
+
+/pullbbox {
+        exch
+        4 -1 roll
+        add -2 div
+        3 1 roll
+        add -2 div
+} def
+
+/pullcorner {
+	exch
+	4 -1 roll
+	exch sub
+	3 1 roll
+	sub
+} def
+
+300 300 translate
+
+questionbangfont findfont questionbangsize scalefont setfont
+
+100 -1 0 {
+	gsave
+	newpath
+	0 0 moveto
+	dup 100 div sqrt sqrt setgray
+	dup 
+	dup 2 mod 1 eq { 0.1 } { -0.1 } ifelse
+	mul rotate
+	dup 2 mod 1 eq { -0.4 } { 0.4 } ifelse
+	mul 0 translate
+	questionbang true charpath pathbbox pullbbox moveto
+	questionbang show
+	grestore
+} for
+
+showpage
