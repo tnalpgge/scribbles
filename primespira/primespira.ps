@@ -1,0 +1,40 @@
+%!PS
+/PI 3.14159265358979 def
+/rad2deg { 180 mul PI div } bind def
+/polarize { dup dup rad2deg cos mul exch dup rad2deg sin mul } bind def
+/sieve { 
+	/n exch def
+	{
+		2 1 n sqrt truncate {
+			n exch mod 0 eq { 
+				stop 
+			} if
+		} for
+	} stopped 
+	not
+} bind def
+500 500 translate
+ZOOM ZOOM scale
+0 0 0 setrgbcolor
+1 setlinewidth
+1 setlinecap
+1 setlinejoin
+newpath
+0 0 moveto
+0 0 rlineto
+stroke
+/NewCenturySchlbk-Roman findfont POINTS scalefont setfont 
+2 1 UPPERBOUND {
+	/i exch def
+	i sieve {
+		newpath
+		i polarize moveto
+		POINTS 0 eq {
+			0 0 rlineto
+			stroke
+		} {
+			i (xxxxxx) cvs show
+		} ifelse
+	} if
+} for
+showpage
