@@ -1,0 +1,64 @@
+%!PS
+
+/CUPHEIGHT 200 def
+/CUPBASE 3 def
+/CUPLIP 5 def
+/CUPSEGMENT 40 def
+/cuppath {
+	newpath
+	0 CUPHEIGHT moveto 
+	CUPSEGMENT 0 lineto
+	CUPSEGMENT CUPLIP CUPBASE sub 2 div CUPBASE add mul 0 lineto
+	CUPSEGMENT CUPLIP mul CUPHEIGHT lineto
+	closepath 
+} bind def
+/lippath { 
+	newpath 
+	0 0 CUPLIP 2 div CUPSEGMENT mul 0 360 arc 
+	closepath 
+} bind def
+/spillpath {
+	newpath
+	0 0 CUPSEGMENT 0 360 arc
+	closepath
+} bind def
+
+gsave
+
+CUPHEIGHT 2 mul 50 translate
+3.5 0.3 scale
+0.5 0.5 0 setrgbcolor
+spillpath fill
+0 0 0 setrgbcolor
+2 setlinewidth
+spillpath stroke
+grestore
+
+gsave
+100 200 translate
+282 rotate
+1 0 0 setrgbcolor
+cuppath
+fill
+2 setlinewidth
+0 0 0 setrgbcolor
+cuppath
+stroke
+
+gsave
+CUPLIP 2 div CUPSEGMENT mul CUPHEIGHT translate
+1.02 0.2 scale
+1 1 1 setrgbcolor
+lippath
+fill
+0 0 0 setrgbcolor
+5 setlinewidth
+lippath
+stroke
+grestore
+
+grestore
+
+
+showpage
+
