@@ -1,0 +1,59 @@
+%!PS
+% gs -dNOPAUSE -dBATCH -sDEVICE=pngalpha -sOutputFile=partycowsay%02d.png partycowsay.ps
+% convert -delay 1 -colors 256 -dispose previous -loop 0 partycowsay*.png partycowsay.gif
+
+/cowtop (^__^) def
+/cowmid (\(oo\)) def
+/cowbot (\(__\)) def
+/cowfont /NimbusMonoPS-Regular def
+/cowfontsize 72 def
+/colorangle { add sin 1 add 2 div } bind def
+/psi 120 def
+/bg {
+    /ANGLE exch def
+    ANGLE 0 colorangle /green exch def
+    ANGLE dup psi colorangle /blue exch def
+    ANGLE psi 2 mul colorangle /red exch def
+    red green blue setrgbcolor
+} bind def
+/cowsay {
+    /ANGLE exch def
+    ANGLE 0 colorangle /red exch def
+    ANGLE dup psi colorangle /green exch def
+    ANGLE psi 2 mul colorangle /blue exch def
+    pstack
+    red green blue setrgbcolor
+    (drawing bottom\n) print
+    newpath
+    0 0 moveto
+    cowbot true charpath fill
+    closepath
+    (drawing middle\n) print
+    newpath
+    0 floorheight moveto
+    cowmid true charpath fill
+    closepath
+    (drawing top\n) print
+    newpath
+    0 floorheight 2 mul moveto
+    cowtop true charpath fill
+    closepath
+} bind def
+/SEGMENTS 18 def
+/phi 360 SEGMENTS div def
+cowfont findfont cowfontsize scalefont setfont
+newpath 0 0 moveto
+(^\(_o\)) true charpath pathbbox
+(bounding box is ) print
+pstack
+exch pop 3 -1 roll pop exch sub
+(floor height is ) print
+pstack
+/floorheight exch def
+0 phi 360 phi sub {
+    gsave
+    20 20 translate    
+    cowsay showpage
+    grestore
+    pop
+} for
