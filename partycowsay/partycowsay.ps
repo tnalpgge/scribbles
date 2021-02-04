@@ -67,11 +67,19 @@ pop exch pop exch sub
 pstack
 /floorwidth exch def
 /widthfudge 1.09 def
+<< /PageSize [
+       floorwidth widthfudge 1.08 mul mul
+       floorheight heightfudge 3 mul mul 20 add
+   ]
+>> setpagedevice
 0 phi 360 phi sub {
     gsave
     dup
+    gsave
+    1 1.08 scale
     bg
-    0 10 translate
+    grestore
+    0 20 translate
     cowsay
     showpage
     grestore
