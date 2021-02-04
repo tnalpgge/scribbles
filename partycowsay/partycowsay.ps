@@ -6,7 +6,7 @@
 /cowmid (\(oo\)) def
 /cowbot (\(__\)) def
 /cowfont /NimbusMonoPS-Regular def
-/cowfontsize 72 def
+/cowfontsize 144 def
 /colorangle { add sin 1 add 2 div } bind def
 /psi 120 def
 /bg {
@@ -69,7 +69,7 @@ pstack
 /widthfudge 1.09 def
 << /PageSize [
        floorwidth widthfudge 1.08 mul mul
-       floorheight heightfudge 3 mul mul 20 add
+       floorheight heightfudge 3 mul mul 36 add
    ]
 >> setpagedevice
 0 phi 360 phi sub {
@@ -79,7 +79,7 @@ pstack
     1 1.08 scale
     bg
     grestore
-    0 20 translate
+    0 36 translate
     cowsay
     showpage
     grestore
