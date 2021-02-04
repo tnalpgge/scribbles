@@ -15,6 +15,13 @@
     ANGLE dup psi colorangle /blue exch def
     ANGLE psi 2 mul colorangle /red exch def
     red green blue setrgbcolor
+    newpath
+    0 0 moveto
+    floorwidth widthfudge mul 0 rlineto
+    0 floorheight heightfudge 3 mul mul rlineto
+    floorwidth widthfudge -1 mul mul 0 rlineto
+    0 floorheight heightfudge -3 mul mul rlineto
+    fill
 } bind def
 /cowsay {
     /ANGLE exch def
@@ -30,12 +37,12 @@
     closepath
     (drawing middle\n) print
     newpath
-    0 floorheight moveto
+    0 floorheight heightfudge mul moveto
     cowmid true charpath fill
     closepath
     (drawing top\n) print
     newpath
-    0 floorheight 2 mul moveto
+    0 floorheight heightfudge 2 mul mul moveto
     cowtop true charpath fill
     closepath
 } bind def
@@ -43,17 +50,30 @@
 /phi 360 SEGMENTS div def
 cowfont findfont cowfontsize scalefont setfont
 newpath 0 0 moveto
-(^\(_o\)) true charpath pathbbox
+cowtop true charpath pathbbox
 (bounding box is ) print
 pstack
 exch pop 3 -1 roll pop exch sub
 (floor height is ) print
 pstack
 /floorheight exch def
+/heightfudge 1.05 def
+newpath 0 0 moveto
+cowtop true charpath pathbbox
+(bounding box is ) print
+pstack
+pop exch pop exch sub
+(floor width is ) print
+pstack
+/floorwidth exch def
+/widthfudge 1.09 def
 0 phi 360 phi sub {
     gsave
-    20 20 translate    
-    cowsay showpage
+    dup
+    bg
+    0 10 translate
+    cowsay
+    showpage
     grestore
     pop
 } for
