@@ -1,0 +1,107 @@
+%!PS
+% gs -dNOPAUSE -dBATCH -sDEVICE=pngalpha -sOutputFile=partyrtfm%02d.png partyrtfm.ps
+% convert -delay 1 -colors 256 -dispose previous -loop 0 partyrtfm*.png partyrtfm.gif
+
+/rtfmfontname /NimbusMonoPS-Bold def
+/rtfmfontsize 144 def
+/colorangle { % angle offset => intensity
+    add
+    sin
+    1 add
+    2 div
+} bind def
+/elements 6 def
+/psi 360 elements div def
+/segments 18 def
+/phi 360 segments div def
+/rows 2 def
+/columns 2 def
+/setrgbcolorangle { % angle => --
+    (setting color angle with input ) print pstack
+    /thisangle exch def
+    thisangle psi 2 mul colorangle /red exch def    
+    thisangle 0 colorangle /green exch def
+    thisangle dup psi colorangle /blue exch def
+    red green blue
+    % (setting color to ) print pstack
+    setrgbcolor    
+} bind def
+/bg { % angle => --
+    (printing background with colorangle ) print pstack
+    setrgbcolorangle
+    newpath
+    0 0 moveto
+    floorwidth columns mul widthfudge mul 0 rlineto
+    0 floorheight heightfudge rows mul mul rlineto
+    floorwidth widthfudge -1 columns mul mul mul 0 rlineto
+    0 floorheight heightfudge -1 rows mul mul mul rlineto
+    fill
+} bind def
+/oneletter { % angle letter => --
+    (drawing letter with inputs ) print pstack
+    /thisletter exch def
+    setrgbcolorangle
+    newpath
+    0 0 moveto
+    thisletter true charpath fill closepath
+} bind def
+/RTFM { % angle => --
+    gsave
+    (prepare to draw R\n) print
+    0 floorheight heightfudge mul translate
+    psi add (R) oneletter
+    grestore
+    gsave
+    (prepare to draw T\n) print
+    floorwidth widthfudge mul floorheight heightfudge mul translate
+    psi add (T) oneletter
+    grestore
+    gsave
+    (prepare to draw M\n) print
+    floorwidth widthfudge mul 0 translate
+    psi add (M) oneletter
+    grestore
+    gsave
+    (prepare to draw F\n) print
+    psi add (F) oneletter
+    grestore
+} bind def
+rtfmfontname findfont rtfmfontsize scalefont setfont
+newpath 0 0 moveto
+/bigletter (X) def
+bigletter true charpath pathbbox
+% (bounding box is ) print pstack
+exch pop 3 -1 roll pop exch sub
+% (floor height is ) print pstack
+/floorheight exch def
+/heightfudge 1.05 def
+newpath 0 0 moveto
+bigletter true charpath pathbbox
+% (bounding box is ) print pstack
+pop exch pop exch sub
+% (floor width is ) print pstack
+/floorwidth exch def
+/widthfudge 1.09 def
+/widthmulfudge 1.08 def
+/heightaddfudge 4 def
+<< /PageSize [
+       floorwidth widthfudge widthmulfudge columns mul mul mul
+       floorheight heightfudge rows mul mul heightaddfudge add
+   ]
+>> setpagedevice
+/iteration { % angle => --
+    gsave
+    (iteration with ) print pstack
+    dup
+    gsave
+    1 widthmulfudge scale
+    dup bg
+    grestore
+    0 heightaddfudge translate
+    dup psi add
+    RTFM
+    showpage
+    grestore
+} bind def
+% 0 iteration
+0 phi 360 phi sub { iteration } for
