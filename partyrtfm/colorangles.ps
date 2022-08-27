@@ -1,0 +1,48 @@
+%!PS
+
+% desired color curve:
+% 0/7 -> red ->   [ 1, 0.25, 0.25 ] #f00
+% 1/7 -> orange -> [ 1, 0.5, 0.25 ] #f80
+% 2/7 -> yellow -> [ 1, 1, 0.25 ] #ff0
+% 3/7 -> green ->  [ 0.25, 1, 0.25 ] #0f0
+% 4/7 -> cyan ->  [ 0.25, 1, 1 ] #0ff
+% 5/7 -> blue ->  [ 0.25, 0.5, 1 ] #00f
+% 6/7 -> magenta -> [ 1, 0.25, 1 ] #f0f
+/colorsincycle 7 def
+/piece 360 colorsincycle div def
+/secondpiece piece 2 mul def
+/thirdpiece piece 3 mul def
+/fifthpiece piece 5 mul def
+/sixthpiece piece 6 mul def
+/redangle { % angle => coordinate
+    /thisangle exch def
+    thisangle secondpiece le
+    thisangle sixthpiece ge
+    or {
+        (0 le red le 2 or 6 le red le 7\n) print
+	1
+    } {
+	thisangle thirdpiece ge
+	thisangle fifthpiece le
+	and {
+	    (3 le red le 5\n) print
+	    0.25
+	} {
+	    thisangle fifthpiece gt
+	    thisangle sixthpiece lt
+	    and {
+		(5 lt red lt 6\n) print
+		thisangle fifthpiece sub piece div 0.75 mul 0.25 add
+	    } {
+		(2 lt red lt 3\n) print
+		thirdpiece thisangle sub piece div 0.75 mul 0.25 add
+	    } ifelse
+	} ifelse
+    } ifelse
+} bind def
+/greenangle { % angle => coordinate
+} bind def
+/blueangle { % angle => coordinate
+} bind def
+0 10 360 { pstack redangle pstack pop } for
+
