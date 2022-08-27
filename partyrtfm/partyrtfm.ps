@@ -4,41 +4,155 @@
 
 /rtfmfontname /NimbusMonoPS-Bold def
 /rtfmfontsize 144 def
-/colorangle { % angle offset => intensity
-    add
-    sin
-    1 add
-    2 div
+% desired color curve:
+% 0/7 -> red ->   [ 1, 0.25, 0.25 ] #f44
+% 1/7 -> orange -> [ 1, 0.5, 0.25 ] #f84
+% 2/7 -> yellow -> [ 1, 1, 0.25 ] #ff4
+% 3/7 -> green ->  [ 0.25, 1, 0.25 ] #4f4
+% 4/7 -> cyan ->  [ 0.25, 1, 1 ] #4ff
+% 5/7 -> blue ->  [ 0.25, 0.5, 1 ] #48f
+% 6/7 -> magenta -> [ 1, 0.25, 1 ] #f4f
+/colorsincycle 7 def
+/piece 360 colorsincycle div def
+/secondpiece piece 2 mul def
+/thirdpiece piece 3 mul def
+/fourthpiece piece 4 mul def
+/fifthpiece piece 5 mul def
+/sixthpiece piece 6 mul def
+
+/normalizeangle { % angle => normalized
+    {
+	dup 360 gt {
+	    360 sub
+	} {
+	    exit
+	} ifelse
+    } loop
 } bind def
-/elements 6 def
+
+/greenproportion { % angle => coordinate
+    % 0.25 => 0.5 => 1 => 1 => 1 => 0.5 => 0.25 => ...
+    (compute green proportion with ) print debugreal    
+    /thisangle exch def
+    thisangle secondpiece ge
+    thisangle fourthpiece le
+    and {
+	1
+    } {
+	thisangle sixthpiece ge {
+	    0.25
+	} {
+	    thisangle 0 ge
+	    thisangle piece lt
+	    and {
+		thisangle piece div 0.25 mul 0.25 add
+	    } {
+		thisangle piece ge
+		thisangle secondpiece lt
+		and {
+		    thisangle piece sub piece div 0.5 mul 0.5 add
+		} {
+		    thisangle fourthpiece ge
+		    thisangle fifthpiece lt
+		    and {
+			fifthpiece thisangle sub piece div 0.5 mul 0.5 add
+		    } {
+			sixthpiece thisangle sub piece div 0.25 mul 0.25 add
+		    } ifelse
+		} ifelse
+	    } ifelse
+	} ifelse
+    } ifelse
+    (computed green proportion as ) print debugreal
+} bind def
+
+/blueproportion { % angle => coordinate
+    % 0.25 => 0.25 => 0.25 => 0.25 => 1 => 1 => 1 => ...
+    (compute blue proportion with ) print debugreal
+    /thisangle exch def
+    thisangle 0 ge
+    thisangle thirdpiece le
+    and {
+	0.25
+    } {
+	thisangle fourthpiece ge
+	thisangle sixthpiece le
+	and {
+	    1
+	} {
+	    thisangle thirdpiece gt
+	    thisangle fourthpiece lt
+	    and {
+		thisangle thirdpiece sub piece div 0.75 mul 0.25 add
+	    } {
+		360 thisangle sub piece div 0.75 mul 0.25 add
+	    } ifelse
+	} ifelse
+    } ifelse
+    (computed blue proportion as ) print debugreal    
+} bind def
+
+/redproportion { % angle => coordinate
+    % 1 => 1 => 1 => 0.25 => 0.25 => 0.25 => 1 => ...
+    (compute red proportion with ) print debugreal
+    /thisangle exch def
+    thisangle secondpiece le
+    thisangle sixthpiece ge
+    or {
+	1
+    } {
+	thisangle thirdpiece ge
+	thisangle fifthpiece le
+	and {
+	    0.25
+	} {
+	    thisangle fifthpiece gt
+	    thisangle sixthpiece lt
+	    and {
+		thisangle fifthpiece sub piece div 0.75 mul 0.25 add
+	    } {
+		thirdpiece thisangle sub piece div 0.75 mul 0.25 add
+	    } ifelse
+	} ifelse
+    } ifelse
+    (computed red proportion as ) print debugreal
+} bind def
+
+/elements 5 def
 /psi 360 elements div def
 /segments 18 def
 /phi 360 segments div def
 /rows 2 def
 /columns 2 def
-/setrgbcolorangle { % angle => --
-    (setting color angle with input ) print pstack
-    /thisangle exch def
-    thisangle psi 2 mul colorangle /red exch def    
-    thisangle 0 colorangle /green exch def
-    thisangle dup psi colorangle /blue exch def
-    red green blue
-    % (setting color to ) print pstack
-    setrgbcolor    
+
+/debugreal { % real => real
+    dup 16 string cvs print (\n) print
 } bind def
+
+/setrgbcolorangle { % angle => --
+    (setting color angle with input ) print
+    debugreal
+    /thisangle exch def
+    thisangle redproportion
+    thisangle greenproportion
+    thisangle blueproportion
+    setrgbcolor
+} bind def
+
 /bg { % angle => --
-    (printing background with colorangle ) print pstack
+    (printing background with colorangle ) print
+    debugreal
     setrgbcolorangle
     newpath
     0 0 moveto
-    floorwidth columns mul widthfudge mul 0 rlineto
-    0 floorheight heightfudge rows mul mul rlineto
-    floorwidth widthfudge -1 columns mul mul mul 0 rlineto
-    0 floorheight heightfudge -1 rows mul mul mul rlineto
+    floorwidth columns mul widthmulfudge mul 0 rlineto
+    0 floorheight heightmulfudge mul rows mul rlineto
+    floorwidth widthmulfudge mul -1 columns mul mul 0 rlineto
+    0 floorheight heightmulfudge mul -1 rows mul mul rlineto
     fill
 } bind def
 /oneletter { % angle letter => --
-    (drawing letter with inputs ) print pstack
+    (drawing letter with inputs ) print dup print ( ) print exch debugreal exch
     /thisletter exch def
     setrgbcolorangle
     newpath
@@ -46,24 +160,25 @@
     thisletter true charpath fill closepath
 } bind def
 /RTFM { % angle => --
+    (draw RTFM with inputs ) print debugreal
     gsave
     (prepare to draw R\n) print
-    0 floorheight heightfudge mul translate
-    psi add (R) oneletter
+    0 floorheight heightmulfudge mul translate
+    dup normalizeangle (R) oneletter
     grestore
     gsave
     (prepare to draw T\n) print
-    floorwidth widthfudge mul floorheight heightfudge mul translate
-    psi add (T) oneletter
+    floorwidth widthmulfudge mul floorheight heightmulfudge mul translate
+    dup psi add normalizeangle (T) oneletter
     grestore
     gsave
     (prepare to draw M\n) print
-    floorwidth widthfudge mul 0 translate
-    psi add (M) oneletter
+    floorwidth widthmulfudge mul 0 translate
+    dup psi 2 mul add normalizeangle (M) oneletter
     grestore
     gsave
     (prepare to draw F\n) print
-    psi add (F) oneletter
+    dup psi 3 mul add normalizeangle (F) oneletter
     grestore
 } bind def
 rtfmfontname findfont rtfmfontsize scalefont setfont
@@ -74,31 +189,32 @@ bigletter true charpath pathbbox
 exch pop 3 -1 roll pop exch sub
 % (floor height is ) print pstack
 /floorheight exch def
-/heightfudge 1.05 def
+
 newpath 0 0 moveto
 bigletter true charpath pathbbox
 % (bounding box is ) print pstack
 pop exch pop exch sub
 % (floor width is ) print pstack
 /floorwidth exch def
-/widthfudge 1.09 def
-/widthmulfudge 1.08 def
+/widthmulfudge 1.05 def
+/widthaddfudge 0 def
+/heightmulfudge 1.05 def
 /heightaddfudge 4 def
 << /PageSize [
-       floorwidth widthfudge widthmulfudge columns mul mul mul
-       floorheight heightfudge rows mul mul heightaddfudge add
+       floorwidth columns mul widthmulfudge mul widthaddfudge add
+       floorheight rows mul heightmulfudge mul heightaddfudge add
    ]
 >> setpagedevice
 /iteration { % angle => --
     gsave
-    (iteration with ) print pstack
+    (iteration with ) print debugreal
     dup
     gsave
     1 widthmulfudge scale
     dup bg
     grestore
     0 heightaddfudge translate
-    dup psi add
+    dup psi add normalizeangle
     RTFM
     showpage
     grestore
