@@ -1,0 +1,93 @@
+div.khuylo {
+    text-align: center;
+}
+
+.khuylo span {
+    font-family: "Open Sans", Helvetica, sans-serif;
+    font-size: 180pt;
+    font-weight: bold;
+    text-shadow: black 0 0 0.1em;
+    animation-name: ostentatious;
+    animation-delay: 0s;
+    animation-direction: normal;
+    animation-duration: 9s;
+    animation-iteration-count: infinite;
+    animation-play-state: running;
+    animation-timing-function: linear;
+}
+
+#us, #ru {
+    animation-name: switcher;
+    animation-delay: 0s;
+    animation-direction: normal;
+    animation-duration: 12s;
+    animation-iteration-count: infinite;
+    animation-play-state: running;
+}
+
+.unfunny-shmuck {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    animation-name: flamboyant;
+    animation-delay: 0s;
+    animation-direction: normal;
+    animation-duration: 6s;
+    animation-iteration-count: infinite;
+    animation-play-state: running;
+    animation-timing-function: linear;
+}
+
+#us {
+    animation-delay: -6s;
+}
+
+#us span {
+    animation-delay: -3s;
+}
+
+#ru span {
+    animation-delay: -6s;
+}
+
+@keyframes flamboyant {
+    0% {
+	background-color: #ff8080;
+    }
+    33% {
+	background-color: #80ff80;
+    }
+    66% {
+	background-color: #8080ff;
+    }
+    100% {
+	background-color: #ff8080;
+    }
+}
+
+@keyframes ostentatious {
+    0% {
+	color: #80ffff;
+    }
+    33% {
+	color: #ff80ff;
+    }
+    66% {
+	color: #ffff80;
+    }
+    100% {
+	color: #80ffff;
+    }
+}
+
+@keyframes switcher {
+    0% {
+	opacity: 0;
+    }
+    50% {
+	opacity: 1;
+    }
+    100% {
+	opacity: 0;
+    }
+}
