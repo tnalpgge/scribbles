@@ -5,15 +5,15 @@ DUMMY=dummy
 LOOP=-loop 0
 DELAY=-delay 10
 DISPOSE=-dispose Previous
-AMPLITUDE=72
-SHIFT=111
+AMPLITUDE=90
+SHIFT=75
 FRAMES=18
 BC=bc
 # https://en.wikipedia.org/wiki/Triangle_wave
-BCPROG=am=${AMPLITUDE};pd=${FRAMES};sh=${SHIFT};(4*am/pd)*abs(((((x-(y*pd/4))%pd)+pd)%pd)-(pd/2))+sh
-#FONTNAME=dejavu sans mono bold
-FONTNAME=nimbusmonops bold
-FONTSIZE=36
+BCPROG=am=${AMPLITUDE};pd=${FRAMES};sh=${SHIFT};(4*am/pd)*abs(((((x-(y*pd/3))%pd)+pd)%pd)-(pd/2))+sh
+FONTNAME=dejavu sans mono bold
+#FONTNAME=nimbusmonops bold
+FONTSIZE=72
 
 all: ${GOAL}
 
@@ -23,7 +23,7 @@ ${GOAL}.gif:
 	${CONVERT} -colors 256 ${LOOP} ${DELAY} ${DISPOSE} ${.ALLSRC} ${.TARGET}
 
 .for i in ${DUMMY:range=18}
-${GOAL}.gif: ${GOAL}_${i:C/^(.)$/0\1/}.gif
+${GOAL}.gif: ${GOAL}_${i:C/^(.)$/0\1/}.png
 
 ${GOAL}_${i:C/^(.)$/0\1/}.gv: ${GOAL}.gv.tmpl
 	r=`echo "x=${i}; y=3; ${BCPROG}" | bc`; \
