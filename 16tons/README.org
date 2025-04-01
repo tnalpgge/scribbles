@@ -1,0 +1,62 @@
+#+title: 16 Tons
+
+* 16 Tons
+
+A tiny image for demonstrating the gravity of the situation.
+
+Every other file in this directory can be generated from this one.
+
+If you want the ~.png~ then use one of the Makefiles.  If you want another image format, consider a conversion tool.
+
+#+header: :tangle 16tons.gv
+#+header: :file 16tons.svg
+#+begin_src dot
+  graph {
+    bgcolor=transparent;
+    a [shape=trapezium, style=filled, color=white, penwidth=2, fillcolor="#111", label="16", fontcolor=white, fontsize=36, fontname="monospace bold"];
+    b [style=invis];
+    b -- a [color="white;0.1:#111", penwidth=7];
+}
+#+end_src
+
+#+RESULTS:
+[[file:16tons.svg]]
+
+#+header: :tangle makefile
+#+begin_src makefile
+  SRC=16tons.gv
+  OBJ=${SRC:R}.png ${SRC:R}.svg
+  DOT=dot
+  RM=rm
+
+  all: ${OBJ}
+
+  .SUFFIXES: .gv .png .svg
+
+  .gv.svg:
+  	${DOT} -T${.TARGET:E} -o${.TARGET} ${.IMPSRC}
+
+  .gv.png:
+  	${DOT} -T${.TARGET:E} -o${.TARGET} ${.IMPSRC}
+
+  clean:
+  	-${RM} -f ${OBJ}
+#+end_src
+
+#+header: :tangle GNUmakefile
+#+begin_src makefile
+  SRC=16tons.gv
+  OBJ=$(SRC:.gv=.png) $(SRC:.gv=.svg)
+  DOT=dot
+
+  all: $(OBJ)
+
+  %.svg: %.gv
+  	$(DOT) -T$(subst .,,$(suffix $@)) -o$@ $<
+
+  %.png: %.gv
+  	$(DOT) -T$(subst .,,$(suffix $@)) -o$@ $<
+
+  clean:
+  	-${RM} -f $(OBJ)
+#+end_src

@@ -1,0 +1,6 @@
+graph {
+    bgcolor=transparent;
+    a [shape=trapezium, style=filled, color=white, penwidth=2, fillcolor="#111", label="16", fontcolor=white, fontsize=36, fontname="monospace bold"];
+    b [style=invis];
+    b -- a [color="white;0.1:#111", penwidth=7];
+}
