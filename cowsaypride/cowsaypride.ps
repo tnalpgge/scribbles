@@ -1,0 +1,80 @@
+%!PS
+
+/COWTOP (^__^) def
+/COWMID (\(oo\)) def
+/COWBOT (\(__\)) def
+/COWFONT /Courier-Bold def
+/COWFONTSIZE 162 def
+/PAGEWIDTH 720 def
+/PAGEHEIGHT 540 def
+/XFUDGE 1.0 def
+/YFUDGE 1.44 def
+
+<< /PageSize [ PAGEWIDTH PAGEHEIGHT ] >> setpagedevice
+
+/stripe { % fraction ordinal r g b --
+    gsave
+    setrgbcolor
+    /ordinal exch def
+    /fraction exch def
+    PAGEHEIGHT fraction div /stripeheight exch def
+    newpath
+    0 stripeheight ordinal mul moveto
+    PAGEWIDTH 0 rlineto
+    0 stripeheight rlineto
+    -1 PAGEWIDTH mul 0 rlineto
+    % 0 -1 stripeheight mul rmoveto
+    closepath
+    fill
+    grestore
+} def
+
+/cowpath { % x y --
+    newpath
+    /lly exch def
+    /llx exch def
+    % lly = (lly\n) print
+    % llx = (llx\n) print
+    llx lly COWFONTSIZE 2 mul add moveto
+    COWTOP true charpath
+    llx lly COWFONTSIZE add moveto
+    COWMID true charpath
+    llx lly moveto
+    COWBOT true charpath
+    closepath
+} def
+
+6 0 0.5 0.0 0.5 stripe
+6 1 0.0 0.0 1.0 stripe
+6 2 0.0 1.0 0.0 stripe
+6 3 1.0 1.0 0.0 stripe
+6 4 1.0 0.5 0.0 stripe
+6 5 1.0 0.0 0.0 stripe
+
+% invert color sequence within cow head
+COWFONT findfont COWFONTSIZE scalefont setfont
+% cowrender
+0 0 cowpath pathbbox
+pstack
+exch 3 1 roll
+exch sub
+% dup = (cowpathheight\n) print
+/cowpathheight exch def
+exch sub
+% dup = (cowpathwidth\n) print
+/cowpathwidth exch def
+PAGEWIDTH cowpathwidth sub 2 div XFUDGE mul
+% dup = (clipx\n) print
+PAGEHEIGHT cowpathheight sub 2 div YFUDGE mul
+% dup = (clipy\n) print
+cowpath clip
+
+6 0 1.0 0.0 0.0 stripe
+6 1 1.0 0.5 0.0 stripe
+6 2 1.0 1.0 0.0 stripe
+6 3 0.0 1.0 0.0 stripe
+6 4 0.0 0.0 1.0 stripe
+6 5 0.5 0.0 0.5 stripe
+
+showpage
+-
