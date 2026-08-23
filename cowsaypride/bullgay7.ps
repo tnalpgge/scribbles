@@ -1,0 +1,43 @@
+%!PS
+% gs -dNOSAFER
+
+% https://en.wikipedia.org/wiki/Gay_men's_flags
+% seven-stripe variant
+
+(cowsaypride.ps) run
+
+7 0 GAYMENDARKBLUE stripe
+7 1 GAYMENMEDIUMBLUE stripe
+7 2 GAYMENLIGHTBLUE stripe
+7 3 WHITE stripe
+7 4 GAYMENLIGHTGREEN stripe
+7 5 GAYMENMEDIUMGREEN stripe
+7 6 GAYMENDARKGREEN stripe
+
+% invert color sequence within cow head
+COWFONT findfont COWFONTSIZE scalefont setfont
+% cowrender
+0 0 cowpath pathbbox
+pstack
+exch 3 1 roll
+exch sub
+% dup = (cowpathheight\n) print
+/cowpathheight exch def
+exch sub
+% dup = (cowpathwidth\n) print
+/cowpathwidth exch def
+PAGEWIDTH cowpathwidth sub 2 div XFUDGE mul
+% dup = (clipx\n) print
+PAGEHEIGHT cowpathheight sub 2 div YFUDGE mul
+% dup = (clipy\n) print
+cowpath clip
+
+7 0 GAYMENDARKGREEN stripe
+7 1 GAYMENMEDIUMGREEN stripe
+7 2 GAYMENLIGHTGREEN stripe
+7 3 BLACK stripe
+7 4 GAYMENLIGHTBLUE stripe
+7 5 GAYMENMEDIUMBLUE stripe
+7 6 GAYMENDARKBLUE stripe
+
+showpage

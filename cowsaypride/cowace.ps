@@ -1,0 +1,36 @@
+%!PS
+% gs -dNOSAFER
+
+(cowsaypride.ps) run
+
+% https://en.wikipedia.org/wiki/Asexual_flag
+
+4 0 VIOLET stripe
+4 1 WHITE stripe
+4 2 ACEGREY stripe
+4 3 BLACK stripe
+
+% invert color sequence within cow head
+COWFONT findfont COWFONTSIZE scalefont setfont
+% cowrender
+0 0 cowpath pathbbox
+pstack
+exch 3 1 roll
+exch sub
+% dup = (cowpathheight\n) print
+/cowpathheight exch def
+exch sub
+% dup = (cowpathwidth\n) print
+/cowpathwidth exch def
+PAGEWIDTH cowpathwidth sub 2 div XFUDGE mul
+% dup = (clipx\n) print
+PAGEHEIGHT cowpathheight sub 2 div YFUDGE mul
+% dup = (clipy\n) print
+cowpath clip
+
+4 0 ACEGREY stripe
+4 1 BLACK stripe
+4 2 VIOLET stripe
+4 3 WHITE stripe
+
+showpage

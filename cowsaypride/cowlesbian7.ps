@@ -1,0 +1,43 @@
+%!PS
+% gs -dNOSAFER
+
+% https://en.wikipedia.org/wiki/Lesbian_flags
+% seven-stripe variant
+
+(cowsaypride.ps) run
+
+7 0 LESBIANDARKPINK stripe
+7 1 LESBIANMEDIUMPINK stripe
+7 2 LESBIANLIGHTPINK stripe
+7 3 WHITE stripe
+7 4 LESBIANLIGHTORANGE stripe
+7 5 LESBIANMEDIUMORANGE stripe
+7 6 LESBIANDARKORANGE stripe
+
+% invert color sequence within cow head
+COWFONT findfont COWFONTSIZE scalefont setfont
+% cowrender
+0 0 cowpath pathbbox
+pstack
+exch 3 1 roll
+exch sub
+% dup = (cowpathheight\n) print
+/cowpathheight exch def
+exch sub
+% dup = (cowpathwidth\n) print
+/cowpathwidth exch def
+PAGEWIDTH cowpathwidth sub 2 div XFUDGE mul
+% dup = (clipx\n) print
+PAGEHEIGHT cowpathheight sub 2 div YFUDGE mul
+% dup = (clipy\n) print
+cowpath clip
+
+7 0 LESBIANDARKORANGE stripe
+7 1 LESBIANMEDIUMORANGE stripe
+7 2 LESBIANLIGHTORANGE stripe
+7 3 BLACK stripe
+7 4 LESBIANLIGHTPINK stripe
+7 5 LESBIANMEDIUMPINK stripe
+7 6 LESBIANDARKPINK stripe
+
+showpage
