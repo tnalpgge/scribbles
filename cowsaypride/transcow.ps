@@ -1,0 +1,50 @@
+%!PS
+% gs -dNOSAFER
+
+% https://en.wikipedia.org/wiki/Transgender_flag
+% 1999
+
+(cowsaypride.ps) run
+
+5 0 TRANSBLUE stripe
+5 1 TRANSPINK stripe
+5 2 WHITE stripe
+5 3 TRANSPINK stripe
+5 4 TRANSBLUE stripe
+
+% rearrange color sequence within cow head
+COWFONT findfont COWFONTSIZE scalefont setfont
+% cowrender
+0 0 cowpath pathbbox
+pstack
+exch 3 1 roll
+exch sub
+% dup = (cowpathheight\n) print
+/cowpathheight exch def
+exch sub
+% dup = (cowpathwidth\n) print
+/cowpathwidth exch def
+PAGEWIDTH cowpathwidth sub 2 div XFUDGE mul
+% dup = (clipx\n) print
+PAGEHEIGHT cowpathheight sub 2 div YFUDGE mul
+% dup = (clipy\n) print
+cowpath clip
+
+5 0 WHITE stripe % pink and blue split well...
+5 1 WHITE stripe % ...in this part of the image.
+5 2 ACEGREY stripe  % black doesn't work, and equal proportions of pink and blue are difficult
+5 3 WHITE stripe % pink and blue get lost...
+5 4 WHITE stripe % ...in this part of the image.
+
+% "The pattern is such that no matter which way you fly it, it is always correct, signifying us finding correctness in our lives." [53] Monica Helms
+% "LOOK: Historic Transgender Flag Flies Over The Castro". HuffPost. November 20, 2012. Archived from the original on October 23, 2022. Retrieved December 7, 2022.
+
+% The cow head is horizontally but not vertically symmetric, and I
+% would like to preserve the sentiment of correctness in any geometric
+% orientation, but I think that placing more than one cow head upon
+% the flag (perhaps two, or four?) would cheapen it.  Then again, this
+% is a project for amusement and education as much as for any other
+% purpose, and I'm fine with yet another thorn in the transphobes'
+% side.
+
+showpage
