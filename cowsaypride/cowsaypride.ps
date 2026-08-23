@@ -5,7 +5,7 @@
 /COWBOT (\(__\)) def
 /COWFONT /Courier-Bold def
 /COWFONTSIZE 162 def
-/PAGEWIDTH 720 def
+/PAGEWIDTH 900 def
 /PAGEHEIGHT 540 def
 /XFUDGE 1.0 def
 /YFUDGE 1.44 def
@@ -29,6 +29,10 @@
     grestore
 } def
 
+/graystripe { %- fraction ordinal shade --
+    dup dup stripe
+} def
+
 /cowpath { % x y --
     newpath
     /lly exch def
@@ -43,3 +47,31 @@
     COWBOT true charpath
     closepath
 } def
+
+/fromhexcolor { 256 div } def
+
+% #800080
+/VIOLET { 0.5 0.0 0.5 } def
+% #0000ff
+/BLUE { 0.0 0.0 1.0 } def
+% #00ff00
+/GREEN { 0.0 1.0 0.0 } def
+% #ffff00
+/YELLOW { 1.0 1.0 0.0 } def
+% #ff8000
+/ORANGE { 1.0 0.5 0.0 } def
+% #ff0000
+/RED { 1.0 0.0 0.0 } def
+% #ffffff
+/WHITE { 1 1 1 } def
+% #000000
+/BLACK { 0 0 0 } def
+
+% https://en.wikipedia.org/wiki/Bisexual_flag
+% #0038a8
+/ROYALBLUE { 0 56 fromhexcolor 168 fromhexcolor } def
+% #9b4f96
+/LAVENDER { 155 fromhexcolor 79 fromhexcolor 150 fromhexcolor } def
+% #d60270
+/MAGENTA { 214 fromhexcolor 2 fromhexcolor 112 fromhexcolor } def
+

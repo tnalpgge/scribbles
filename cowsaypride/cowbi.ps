@@ -1,17 +1,15 @@
 %!PS
 % gs -dNOSAFER
 
-% https://en.wikipedia.org/wiki/Rainbow_flag_(LGBTQ)
-% six-stripe 1979 variant
-
 (cowsaypride.ps) run
 
-6 0 VIOLET stripe
-6 1 BLUE stripe
-6 2 GREEN stripe
-6 3 YELLOW stripe
-6 4 ORANGE stripe
-6 5 RED stripe
+% % https://en.wikipedia.org/wiki/Bisexual_flag
+
+5 0 ROYALBLUE stripe
+5 1 ROYALBLUE stripe
+5 2 LAVENDER stripe
+5 3 MAGENTA stripe
+5 4 MAGENTA stripe
 
 % invert color sequence within cow head
 COWFONT findfont COWFONTSIZE scalefont setfont
@@ -31,11 +29,6 @@ PAGEHEIGHT cowpathheight sub 2 div YFUDGE mul
 % dup = (clipy\n) print
 cowpath clip
 
-6 0 RED stripe
-6 1 ORANGE stripe
-6 2 YELLOW stripe
-6 3 GREEN stripe
-6 4 BLUE stripe
-6 5 VIOLET stripe
+1 0 0.63 graystripe
 
 showpage
