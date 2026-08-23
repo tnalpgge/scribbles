@@ -14,30 +14,16 @@
 7 5 ORANGE stripe
 7 6 RED stripe
 
-% invert color sequence within cow head
-COWFONT findfont COWFONTSIZE scalefont setfont
-% cowrender
-0 0 cowpath pathbbox
-pstack
-exch 3 1 roll
-exch sub
-% dup = (cowpathheight\n) print
-/cowpathheight exch def
-exch sub
-% dup = (cowpathwidth\n) print
-/cowpathwidth exch def
-PAGEWIDTH cowpathwidth sub 2 div XFUDGE mul
-% dup = (clipx\n) print
-PAGEHEIGHT cowpathheight sub 2 div YFUDGE mul
-% dup = (clipy\n) print
-cowpath clip
+cowtrace
+% alternate color sequence within cow head
+typicalcowplace
 
-7 0 RED stripe
-7 1 ORANGE stripe
-7 2 YELLOW stripe
-7 3 HOTPINK stripe
-7 4 TURQUOISE stripe
+7 0 GREEN stripe
+7 1 YELLOW stripe
+7 2 ORANGE stripe
+7 3 RED stripe
+7 4 VIOLET stripe
 7 5 INDIGO stripe
-7 6 VIOLET stripe
+7 6 TURQUOISE stripe
 
 showpage

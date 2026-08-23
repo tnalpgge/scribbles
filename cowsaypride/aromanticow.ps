@@ -12,28 +12,15 @@
 5 3 AROLIGHTGREEN stripe
 5 4 ARODARKGREEN stripe
 
-% invert color sequence within cow head
-COWFONT findfont COWFONTSIZE scalefont setfont
-% cowrender
-0 0 cowpath pathbbox
-pstack
-exch 3 1 roll
-exch sub
-% dup = (cowpathheight\n) print
-/cowpathheight exch def
-exch sub
-% dup = (cowpathwidth\n) print
-/cowpathwidth exch def
-PAGEWIDTH cowpathwidth sub 2 div XFUDGE mul
-% dup = (clipx\n) print
-PAGEHEIGHT cowpathheight sub 2 div YFUDGE mul
-% dup = (clipy\n) print
-cowpath clip
+cowtrace
 
-5 0 WHITE stripe
-5 1 WHITE stripe
-5 2 BLACK stripe
-5 3 BLACK stripe
+% alternate color [sic] sequence within cow head
+typicalcowplace
+
+5 0 AROLIGHTGREEN stripe
+5 1 ARODARKGREEN stripe
+5 2 AROGRAY stripe
+5 3 WHITE stripe
 5 4 BLACK stripe
 
 showpage

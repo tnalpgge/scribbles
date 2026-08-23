@@ -3,6 +3,9 @@
 /COWTOP (^__^) def
 /COWMID (\(oo\)) def
 /COWBOT (\(__\)) def
+/BULLTOP (\\_^__^_/) def
+/BULLMID (  \(oo\)  ) def
+/BULLBOT (  \(__\)  ) def
 /COWFONT /Courier-Bold def
 /COWFONTSIZE 162 def
 /PAGEWIDTH 900 def
@@ -37,8 +40,6 @@
     newpath
     /lly exch def
     /llx exch def
-    % lly = (lly\n) print
-    % llx = (llx\n) print
     llx lly COWFONTSIZE 2 mul add moveto
     COWTOP true charpath
     llx lly COWFONTSIZE add moveto
@@ -46,6 +47,61 @@
     llx lly moveto
     COWBOT true charpath
     closepath
+} def
+
+/bullpath { % x y --
+    newpath
+    /lly exch def
+    /llx exch def
+    llx lly COWFONTSIZE 2 mul add moveto
+    BULLTOP true charpath
+    llx lly COWFONTSIZE add moveto
+    BULLMID true charpath
+    llx lly moveto
+    BULLBOT true charpath
+    closepath
+} def
+
+/cowtrace {
+    COWFONT findfont COWFONTSIZE scalefont setfont
+    0 0 cowpath pathbbox
+    pstack
+    exch 3 1 roll
+    exch sub
+    /cowpathheight exch def
+    exch sub
+    /cowpathwidth exch def
+} def
+
+/bulltrace {
+    COWFONT findfont COWFONTSIZE scalefont setfont
+    0 0 bullpath pathbbox
+    pstack
+    exch 3 1 roll
+    exch sub
+    /bullpathheight exch def
+    exch sub
+    /bullpathwidth exch def
+} def
+
+/cowplace { % x y --
+    cowpath clip
+} def
+
+/bullplace { % x y --
+    bullpath clip
+} def
+
+/typicalcowplace {
+    PAGEWIDTH cowpathwidth sub 2 div XFUDGE mul
+    PAGEHEIGHT cowpathheight sub 2 div YFUDGE mul
+    cowplace
+} def
+
+/typicalbullplace {
+    PAGEWIDTH bullpathwidth sub 2 div XFUDGE mul
+    PAGEHEIGHT bullpathheight sub 2 div YFUDGE mul
+    bullplace    
 } def
 
 /fromhexcolor { 256 div } def

@@ -11,24 +11,14 @@
 5 3 MAGENTA stripe
 5 4 MAGENTA stripe
 
-% invert color sequence within cow head
-COWFONT findfont COWFONTSIZE scalefont setfont
-% cowrender
-0 0 cowpath pathbbox
-pstack
-exch 3 1 roll
-exch sub
-% dup = (cowpathheight\n) print
-/cowpathheight exch def
-exch sub
-% dup = (cowpathwidth\n) print
-/cowpathwidth exch def
-PAGEWIDTH cowpathwidth sub 2 div XFUDGE mul
-% dup = (clipx\n) print
-PAGEHEIGHT cowpathheight sub 2 div YFUDGE mul
-% dup = (clipy\n) print
-cowpath clip
+cowtrace
+% alternate color sequence within cow head
+typicalcowplace
 
-1 0 0.63 graystripe
+5 0 MAGENTA stripe
+5 1 MAGENTA stripe
+5 2 0.63 graystripe
+5 3 ROYALBLUE stripe
+5 4 ROYALBLUE stripe
 
 showpage
