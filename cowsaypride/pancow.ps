@@ -1,0 +1,35 @@
+%!PS
+% gs -dNOSAFER
+
+(cowsaypride.ps) run
+
+% https://en.wikipedia.org/wiki/Pansexual_flag
+% 2010
+
+3 0 PANCYAN stripe
+3 1 PANYELLOW stripe
+3 2 PANMAGENTA stripe
+
+% rotate color sequence within cow head
+COWFONT findfont COWFONTSIZE scalefont setfont
+% cowrender
+0 0 cowpath pathbbox
+pstack
+exch 3 1 roll
+exch sub
+% dup = (cowpathheight\n) print
+/cowpathheight exch def
+exch sub
+% dup = (cowpathwidth\n) print
+/cowpathwidth exch def
+PAGEWIDTH cowpathwidth sub 2 div XFUDGE mul
+% dup = (clipx\n) print
+PAGEHEIGHT cowpathheight sub 2 div YFUDGE mul
+% dup = (clipy\n) print
+cowpath clip
+
+3 0 PANYELLOW stripe
+3 1 PANMAGENTA stripe
+3 2 PANCYAN stripe
+
+showpage
