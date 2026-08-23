@@ -1,0 +1,37 @@
+%!PS
+% gs -dNOSAFER
+
+(cowsaypride.ps) run
+
+% https://en.wikipedia.org/wiki/Non-binary_flag
+% cosmic latte variant
+
+4 0 ENBYBLACK stripe
+4 1 ENBYPURPLE stripe
+4 2 ENBYCOSMICLATTE stripe
+4 3 ENBYYELLOW stripe
+
+% invert color sequence within cow head
+COWFONT findfont COWFONTSIZE scalefont setfont
+% cowrender
+0 0 cowpath pathbbox
+pstack
+exch 3 1 roll
+exch sub
+% dup = (cowpathheight\n) print
+/cowpathheight exch def
+exch sub
+% dup = (cowpathwidth\n) print
+/cowpathwidth exch def
+PAGEWIDTH cowpathwidth sub 2 div XFUDGE mul
+% dup = (clipx\n) print
+PAGEHEIGHT cowpathheight sub 2 div YFUDGE mul
+% dup = (clipy\n) print
+cowpath clip
+
+4 0 ENBYYELLOW stripe
+4 1 ENBYCOSMICLATTE stripe
+4 2 ENBYPURPLE stripe
+4 3 ENBYBLACK stripe
+
+showpage
