@@ -1,0 +1,45 @@
+%!PS
+% gs -dNOSAFER
+
+% https://en.wikipedia.org/wiki/Rainbow_flag_(LGBTQ)
+% eight-stripe 1978 variant
+
+(cowsaypride.ps) run
+
+8 0 VIOLET stripe
+8 1 INDIGO stripe
+8 2 TURQUOISE stripe
+8 3 GREEN stripe
+8 4 YELLOW stripe
+8 5 ORANGE stripe
+8 6 RED stripe
+8 7 HOTPINK stripe
+
+% invert color sequence within cow head
+COWFONT findfont COWFONTSIZE scalefont setfont
+% cowrender
+0 0 cowpath pathbbox
+pstack
+exch 3 1 roll
+exch sub
+% dup = (cowpathheight\n) print
+/cowpathheight exch def
+exch sub
+% dup = (cowpathwidth\n) print
+/cowpathwidth exch def
+PAGEWIDTH cowpathwidth sub 2 div XFUDGE mul
+% dup = (clipx\n) print
+PAGEHEIGHT cowpathheight sub 2 div YFUDGE mul
+% dup = (clipy\n) print
+cowpath clip
+
+8 0 HOTPINK stripe
+8 1 RED stripe
+8 2 ORANGE stripe
+8 3 YELLOW stripe
+8 4 GREEN stripe
+8 5 TURQUOISE stripe
+8 6 INDIGO stripe
+8 7 VIOLET stripe
+
+showpage
