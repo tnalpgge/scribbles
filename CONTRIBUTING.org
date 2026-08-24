@@ -1,0 +1,49 @@
+#+title: Contributing to this repository
+#+options: toc:nil author:nil title:nil
+
+* Contributing to this repository
+
+Thank you for your interest in this repository.  If you would like to contribute to it, please keep the following in mind.
+
+** Who may contribute
+
+Humans may contribute.  Humans should behave with honesty and kindness, act in good faith, and treat others with dignity and respect.
+
+** What may be contributed
+
+Humans may contribute human-written content.
+
+Do not contribute content written by artificial intelligence, a large language model, or similar non-human methods.
+
+If you are not sure how to categorize your potential contribution, do not contribute.
+
+** How to contribute
+
+*** Reporting a bug
+
+If you find a bug, you may open an issue with:
+
+- A clear and descriptive but concise title
+- Steps to reproduce the unwanted behavior
+- Description of expected behavior
+- Description of actual behavior
+- Screen shots or logs, if applicable
+- A description of your environment, including relevant software versions, operating system version, etc.
+
+*** Suggesting a feature
+
+If you would like to request a feature, you may open an issue with:
+
+- A clear and descriptive but concise title
+- A detailed description of the feature
+- Why the feature would be useful
+- An example or mock-up
+
+** Pull requests
+
+Please do not open a pull request without a corresponding issue.
+
+1. Fork the repository and create a branch from the default branch.
+2. Make your changes, adding tests if applicable.
+3. If a test suite is present, ensure it runs to completion and passes.
+4. Open the pull request with a clear description of the changes.
