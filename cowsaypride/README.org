@@ -25,19 +25,21 @@ I tried using SVG but placing the cow (or bull) head, with its alternate arrange
 
 [[./cowsaypride.ps][=cowsaypride.ps=]] is the library that all the other =*.ps= files rely upon.
 
-To build any individual file, use Ghostscript.  e.g. for a PNG image:
+To build any individual file, use [[https://ghostscript.com/][Ghostscript]].  e.g. for a PNG image:
 
 #+begin_src sh
   gs -dNOSAFER -dBATCH -dNOPAUSE -dQUIET -sDEVICE=pngalpha -sOutputFile=cowgay.png cowgay.ps
 #+end_src
 
-Use [[./Makefile][=Makefile=]] (BSD make) or [[./GNUmakefile][=GNUmakefile=]] (GNU make) to build all PNG images in one =make= or =gmake= command.  The =clean= target deletes the images.
+Use [[./Makefile][=Makefile=]] (BSD make) or [[./GNUmakefile][=GNUmakefile=]] (GNU make) to build all PNG images in one =make= or =gmake= command.  The =clean= target deletes the images.  
 
 If [[http://www.graphicsmagick.org][GraphicsMagick]] is available,  license information will be embedded in output images.
 
+The =verify= target embeds checksums in the images and validates them.  It requires [[https://www.perl.org/][Perl]] plus [[https://metacpan.org/dist/Image-PNG-Libpng][Image::PNG::Libpng]] (which requires [[https://libpng.org/pub/png/][libpng]]).
+
 * License
 
-Image source code is copyright © by the committers in whatever year they committed.
+Image source code is copyright © by the committer(s) in whatever year they committed.
 
 Image source code is covered by GNU General Public license version 3.  See [[./LICENSE][=LICENSE=]].
 
