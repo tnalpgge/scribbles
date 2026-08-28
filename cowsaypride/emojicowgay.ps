@@ -1,0 +1,26 @@
+%!PS
+% gs -dNOSAFER
+
+% https://en.wikipedia.org/wiki/Rainbow_flag_(LGBTQ)
+% six-stripe 1979 variant
+% trimmed to square chat emoji dimensions
+
+(cowsaypride.ps) run
+
+/PAGEWIDTH 540 def
+<< /PageSize [ PAGEWIDTH PAGEHEIGHT ] >> setpagedevice
+
+6 0 PRIDEVIOLET stripe
+6 1 PRIDEBLUE stripe
+6 2 PRIDEGREEN stripe
+6 3 PRIDEYELLOW stripe
+6 4 PRIDEORANGE stripe
+6 5 PRIDERED stripe
+
+cowtrace
+
+% invert color sequence within cow head
+typicalcowplace
+1 0 WHITE stripe
+
+showpage
