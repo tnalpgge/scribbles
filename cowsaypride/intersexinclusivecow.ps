@@ -1,0 +1,64 @@
+%!PS
+% gs -dNOSAFER
+
+% https://upload.wikimedia.org/wikipedia/commons/6/60/Intersex-inclusive_pride_flag.svg
+
+(cowsaypride.ps) run
+
+6 0 INTERSEXPURPLE stripe
+6 1 INTERSEXDARKBLUE stripe
+6 2 INTERSEXGREEN stripe
+6 3 INTERSEXYELLOW stripe
+6 4 INTERSEXORANGE stripe
+6 5 INTERSEXRED stripe
+
+% from 1200 x 762 image
+% black chevron apex: 667.133 (half)
+% brown: 593.223 (half)
+% cyan 520.333 (half) 
+% pink: 447.417 (half)
+% white: 373.517 (half)
+% gold: 300.617 (half) x 650.167 (height).  smallest half-diagonal is 1/4 total width
+% white chevron covers corner, more "inside" than "outside"
+% left edge of circle aligns vertically with left edge of pink chevron
+
+% circle center at (111, 381) radius 80 stroke-width 19
+% radius 1/15 of width
+% stroke width is slightly less than gap from left edge
+% circle center is 0.0925 (111/1200) of total width from left edge
+
+/CHEVRONDELTA 54 def
+/QUARTERWIDTH PAGEWIDTH 4 div def
+
+QUARTERWIDTH CHEVRONDELTA 5 mul add BLACK leftedgechevron
+QUARTERWIDTH CHEVRONDELTA 4 mul add INTERSEXBROWN leftedgechevron
+QUARTERWIDTH CHEVRONDELTA 3 mul add INTERSEXLIGHTBLUE leftedgechevron
+QUARTERWIDTH CHEVRONDELTA 2 mul add INTERSEXPINK leftedgechevron
+QUARTERWIDTH CHEVRONDELTA add WHITE leftedgechevron
+QUARTERWIDTH INTERSEXGOLD leftedgechevron
+
+newpath
+INTERSEXVIOLET setrgbcolor
+PAGEWIDTH 111 mul 1200 div PAGEHEIGHT 2 div PAGEWIDTH 15 div 0 360 arc 14.25 setlinewidth stroke
+
+cowtrace
+
+% invert stripe color sequence within cow head
+typicalcowplace
+6 0 INTERSEXRED stripe
+6 1 INTERSEXORANGE stripe
+6 2 INTERSEXYELLOW stripe
+6 3 INTERSEXGREEN stripe
+6 4 INTERSEXDARKBLUE stripe
+6 5 INTERSEXPURPLE stripe
+
+% permute chevron color sequence within cow head
+QUARTERWIDTH CHEVRONDELTA 5 mul add INTERSEXPINK leftedgechevron
+QUARTERWIDTH CHEVRONDELTA 4 mul add INTERSEXLIGHTBLUE leftedgechevron
+QUARTERWIDTH CHEVRONDELTA 3 mul add INTERSEXBROWN leftedgechevron
+QUARTERWIDTH CHEVRONDELTA 2 mul add BLACK leftedgechevron
+% cow head doesn't extend this far
+% QUARTERWIDTH CHEVRONDELTA add WHITE leftedgechevron
+% QUARTERWIDTH INTERSEXGOLD leftedgechevron
+
+showpage
