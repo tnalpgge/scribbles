@@ -102,6 +102,19 @@
     bullplace    
 } def
 
+/leftedgechevron { % halfdiagonal r g b --
+    gsave
+    setrgbcolor
+    /halfdiagonal exch def
+    newpath
+    halfdiagonal PAGEHEIGHT 2 div moveto
+    0 halfdiagonal PAGEHEIGHT 2 div add lineto
+    0 halfdiagonal -2 mul rlineto
+    closepath
+    fill
+    grestore
+} def
+
 /fromhexcolor { 256 div } def
 
 % #800080
@@ -475,3 +488,24 @@
 /QUEERRED { 253 fromhexcolor 102 fromhexcolor 102 fromhexcolor } def
 % #ffaec9
 /QUEERPINK { 1 174 fromhexcolor 201 fromhexcolor } def
+
+% https://commons.wikimedia.org/wiki/File:LGBTQ%2B_rainbow_flag_Quasar_%22Progress%22_variant.svg
+% "Used colors" as of 2026-09-01 may have typos, trusting the hex in the SVG here
+% #74d7ee
+/PROGRESSLIGHTBLUE { 116 fromhexcolor 215 fromhexcolor 238 fromhexcolor } def
+% #ffafc8
+/PROGRESSPINK { 1 175 fromhexcolor 200 fromhexcolor } def
+% #613915
+/PROGRESSBROWN { 97 fromhexcolor 57 fromhexcolor 21 fromhexcolor } def
+% #e40303
+/PROGRESSRED { 228 fromhexcolor 3 fromhexcolor 3 fromhexcolor } def
+% #ff8c00
+/PROGRESSORANGE { 1 140 fromhexcolor 0 } def
+% #ffed00
+/PROGRESSYELLOW { 1 237 fromhexcolor 0 } def
+% #008026
+/PROGRESSGREEN { 0 128 fromhexcolor 38 fromhexcolor } def
+% #004dff
+/PROGRESSROYALBLUE { 0 77 fromhexcolor 1 } def
+% #750787
+/PROGRESSPURPLE { 117 fromhexcolor 7 fromhexcolor 135 fromhexcolor } def

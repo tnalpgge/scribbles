@@ -1,0 +1,49 @@
+%!PS
+% gs -dNOSAFER
+
+% Progress Pride
+% 
+
+(cowsaypride.ps) run
+
+6 0 PROGRESSPURPLE stripe
+6 1 PROGRESSROYALBLUE stripe
+6 2 PROGRESSGREEN stripe
+6 3 PROGRESSYELLOW stripe
+6 4 PROGRESSORANGE stripe
+6 5 PROGRESSRED stripe
+
+% from 512 x 325 image
+% black chevron apex: 244.317 (half) 488.867 (full)
+% brown: 203.383 (half) 406.9 (full)
+% cyan (corner-matched): 163.117 (half) 325 (full)
+% pink: 121.15 (half diagonal) 243.133 (full diagonal)
+% white: 81.1333 (half diagonal) 161.233 (full diagonal)
+
+/CHEVRONDELTA 72 def
+/HALFPAGEHEIGHT PAGEHEIGHT 2 div def
+
+HALFPAGEHEIGHT CHEVRONDELTA 2 mul add BLACK leftedgechevron
+HALFPAGEHEIGHT CHEVRONDELTA add PROGRESSBROWN leftedgechevron
+HALFPAGEHEIGHT PROGRESSLIGHTBLUE leftedgechevron
+HALFPAGEHEIGHT CHEVRONDELTA sub PROGRESSPINK leftedgechevron
+HALFPAGEHEIGHT CHEVRONDELTA 2 mul sub WHITE leftedgechevron
+
+cowtrace
+
+% invert color sequences within cow head
+typicalcowplace
+6 0 PROGRESSRED stripe
+6 1 PROGRESSORANGE stripe
+6 2 PROGRESSYELLOW stripe
+6 3 PROGRESSGREEN stripe
+6 4 PROGRESSROYALBLUE stripe
+6 5 PROGRESSPURPLE stripe
+
+HALFPAGEHEIGHT CHEVRONDELTA 2 mul add WHITE leftedgechevron
+HALFPAGEHEIGHT CHEVRONDELTA add PROGRESSPINK leftedgechevron
+HALFPAGEHEIGHT PROGRESSLIGHTBLUE leftedgechevron
+HALFPAGEHEIGHT CHEVRONDELTA sub PROGRESSBROWN leftedgechevron
+HALFPAGEHEIGHT CHEVRONDELTA 2 mul sub BLACK leftedgechevron
+
+showpage
