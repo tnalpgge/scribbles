@@ -1,0 +1,34 @@
+%!PS
+% gs -dNOSAFER
+
+% https://en.wikipedia.org/wiki/Demisexuality
+
+(cowsaypride.ps) run
+
+% stripes: 200+80+200=480
+% stripe width: 5x40 + 2x40 + 5x40
+0 1 4 { 12 exch DEMISEXUALGREY stripe } for
+5 1 6 { 12 exch DEMISEXUALPURPLE stripe } for
+7 1 12 { 12 exch WHITE stripe } for
+
+% from 800 x 480 image
+% black chevron  485.167 (half)
+% assume corner-matched
+
+/HALFPAGEHEIGHT PAGEHEIGHT 2 div def
+
+HALFPAGEHEIGHT BLACK leftedgechevron
+
+cowtrace
+
+% invert color sequences within cow head
+typicalcowplace
+
+0 1 4 { 12 exch BLACK stripe } for
+5 1 6 { 12 exch DEMISEXUALGREY stripe } for
+7 1 12 { 12 exch DEMISEXUALPURPLE stripe } for
+
+% cow does not reach into chevron
+% HALFPAGEHEIGHT WHITE leftedgechevron
+
+showpage
