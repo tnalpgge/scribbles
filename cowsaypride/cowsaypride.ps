@@ -551,3 +551,33 @@
 /INTERSEXYELLOW { 1 216 fromhexcolor 0 } def
 % #7902aa
 /INTERSEXVIOLET { 121 fromhexcolor 2 fromhexcolor 170 fromhexcolor } def
+
+% aryprocs is array of procs that push 3 reals within [0,1] on stack
+% (i.e. a permutation of colorprocs) for eventual use with setrgbcolor
+/indexedstripe { % arycolorprocs index --
+    /index exch def
+    /arycolorprocs exch def
+    arycolorprocs length
+    index
+    arycolorprocs index get exec
+    stripe
+} def
+
+/cowgayframe { % initcolorprocs frame --
+    /frame exch def
+    /initcolorprocs exch def
+    0 1 initcolorprocs length 1 sub {
+	[ initcolorprocs aload length frame roll ]
+	exch
+	indexedstripe
+    } for
+    cowtrace
+    typicalcowplace
+    1 0 WHITE stripe
+    showpage    
+} def
+
+/emojisize {
+    /PAGEWIDTH 540 def
+    << /PageSize [ PAGEWIDTH PAGEHEIGHT ] >> setpagedevice
+} def

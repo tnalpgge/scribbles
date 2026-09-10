@@ -7,8 +7,7 @@
 
 (cowsaypride.ps) run
 
-/PAGEWIDTH 540 def
-<< /PageSize [ PAGEWIDTH PAGEHEIGHT ] >> setpagedevice
+emojisize
 
 /colorprocs [
     { PRIDEVIOLET }
@@ -19,30 +18,6 @@
     { PRIDERED }
 ] def
 
-/cplen { colorprocs length } def
-
-% aryprocs is array of procs that push 3 reals within [0,1] on stack
-% (i.e. a permutation of colorprocs) for eventual use with setrgbcolor
-/indexedstripe { % aryprocs n --
-    /i exch def
-    /a exch def
-    a length
-    i
-    a i get exec
-    stripe
-} def
-
-/cowgaypage { % n -- 
-    /j exch def
-    0 1 cplen 1 sub {
-	[ colorprocs aload pop cplen j roll ]
-	exch
-	indexedstripe
-    } for
-    cowtrace
-    typicalcowplace
-    1 0 WHITE stripe
-    showpage    
-} def
-
-0 1 cplen 1 sub { cowgaypage } for
+0 1 colorprocs length 1 sub {
+    colorprocs exch cowgayframe
+} for
