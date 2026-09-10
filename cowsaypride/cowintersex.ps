@@ -1,0 +1,64 @@
+%!PS
+% gs -dNOSAFER
+
+% https://en.wikipedia.org/wiki/Intersex
+% https://en.wikipedia.org/wiki/Intersex_flag
+
+% "...unbroken and unornamented, symbolising wholeness and
+% completeness, and our potentialities. We are still fighting for
+% bodily autonomy and genital integrity, and this symbolises the right
+% to be who and how we want to be".
+%
+% The cow's head satisfies the unornamented portion but ASCII art is
+% by definition a piecewise affair; wholeness may be present in spirit
+% or intent but it is not physically demonstrated.
+%
+% > The organization describes it as freely available "for use by any
+% > intersex person or organization who wishes to use it, in a human
+% > rights affirming community context".[2]
+%
+% Arguably this should not be committed, as the author of this code is
+% not intersex, and is not a member of an applicable organization.
+% The author of this code intends it to affirm the human rights of
+% intersex people, with a little bit of humor and nerdiness thrown in.
+% The community of those who write software has always included people
+% who are one or more standard deviations from the mean, in some
+% dimension of their humanity.
+
+(cowsaypride.ps) run
+
+% The default cow head looks patently awful in this context; retain
+% only the ears.
+/COWTOP (^  ^) def
+/COWMID (    ) def
+/COWBOT (    ) def
+/PAGEHEIGHT 600 def % alternate aspect ratio
+/XFUDGE 0.98 def
+<< /PageSize [ PAGEWIDTH PAGEHEIGHT ] >> setpagedevice
+
+/thecircle { % --
+    PAGEWIDTH 2 div
+    PAGEHEIGHT 2 div
+    PAGEWIDTH 6 div
+    0 360 arc
+    PAGEWIDTH 18 div setlinewidth
+    stroke
+} def
+
+1 0 INTERSEXYELLOW stripe
+
+newpath
+INTERSEXVIOLET setrgbcolor
+thecircle
+
+cowtrace
+
+% invert colors within cow head
+typicalcowplace
+1 0 INTERSEXVIOLET stripe
+
+newpath
+INTERSEXYELLOW setrgbcolor
+thecircle
+
+showpage
