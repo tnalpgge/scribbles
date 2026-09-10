@@ -1,0 +1,57 @@
+%!PS
+% gs -dNOSAFER -dNOPAUSE -dBATCH -sDEVICE=pngalpha -sOutputFile=cowgayanimated%02d.png cowgayanimated.ps
+% convert -delay 1 -colors 256 -dispose previous -loop 0 cowgayanimated*.png cowgayanimated.gif
+
+% https://en.wikipedia.org/wiki/Rainbow_flag_(LGBTQ)
+% six-stripe 1979 variant
+
+(cowsaypride.ps) run
+
+/PAGEWIDTH 540 def
+<< /PageSize [ PAGEWIDTH PAGEHEIGHT ] >> setpagedevice
+
+/colorprocs [
+    { PRIDEVIOLET }
+    { PRIDEBLUE }
+    { PRIDEGREEN }
+    { PRIDEYELLOW }
+    { PRIDEORANGE }
+    { PRIDERED }
+] def
+
+% (colorprocs = ) print colorprocs ==
+
+/cplen { colorprocs length } def
+
+/cowgaystripe { % n --
+    /i exch def
+    % (i = ) print i =
+    % (loading stack for stripe\n) print
+    cplen i
+    % pstack
+    % (loading color for stripe\n) print
+    thesecolors i get
+    % pstack
+    exec
+    % pstack
+    stripe    
+} def
+
+/cowgaypage { % n -- 
+    /j exch def
+    % (j = ) print j =
+    /thesecolors [ colorprocs aload pop
+		   % (thesecolors after aload \n) print
+		   % pstack
+		   cplen j roll
+		 ] def
+    % (thesecolors = ) print thesecolors ==
+    0 1 cplen 1 sub { cowgaystripe } for
+    cowtrace
+    typicalcowplace
+    1 0 WHITE stripe
+    showpage    
+} def
+
+
+0 1 cplen 1 sub { cowgaypage } for
