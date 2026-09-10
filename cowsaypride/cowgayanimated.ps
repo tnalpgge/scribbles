@@ -19,39 +19,30 @@
     { PRIDERED }
 ] def
 
-% (colorprocs = ) print colorprocs ==
-
 /cplen { colorprocs length } def
 
-/cowgaystripe { % n --
+% aryprocs is array of procs that push 3 reals within [0,1] on stack
+% (i.e. a permutation of colorprocs) for eventual use with setrgbcolor
+/indexedstripe { % aryprocs n --
     /i exch def
-    % (i = ) print i =
-    % (loading stack for stripe\n) print
-    cplen i
-    % pstack
-    % (loading color for stripe\n) print
-    thesecolors i get
-    % pstack
-    exec
-    % pstack
-    stripe    
+    /a exch def
+    a length
+    i
+    a i get exec
+    stripe
 } def
 
 /cowgaypage { % n -- 
     /j exch def
-    % (j = ) print j =
-    /thesecolors [ colorprocs aload pop
-		   % (thesecolors after aload \n) print
-		   % pstack
-		   cplen j roll
-		 ] def
-    % (thesecolors = ) print thesecolors ==
-    0 1 cplen 1 sub { cowgaystripe } for
+    0 1 cplen 1 sub {
+	[ colorprocs aload pop cplen j roll ]
+	exch
+	indexedstripe
+    } for
     cowtrace
     typicalcowplace
     1 0 WHITE stripe
     showpage    
 } def
-
 
 0 1 cplen 1 sub { cowgaypage } for
