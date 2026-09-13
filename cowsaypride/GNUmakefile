@@ -1,7 +1,7 @@
 GS=gs
 GSFLAGS=-dBATCH -dNOPAUSE -dNOSAFER -dQUIET -sDEVICE=pngalpha
 HERD=agendercow arocow arocow1 arocow2 bullgay5 bullgay7 cowabro cowace cowaceflux cowbi cowbigender cowdemiboy cowdemigirl cowgay cowgay7 cowgay8 cowgay9 cowgayflag cowgrayace cowintergender cowlesbian5 cowlesbian7 cowlesbianpink cowmaverique demiagendercow demiromanticow demisexualcow emojicowgay enbycow enbycowlatte genderapatheticow genderfluidcow genderfluxcow genderqueercow gendervoidcow grayrocow intersexinclusivecow neutroiscow omnicow pancow pangendercow polycow quasarprogresscow transbull transcow
-STAMPEDE=cowgayanimated
+STAMPEDE=cowgayanimated cowlesbiananimated bullgayanimated transcowanimated
 SRCS=$(addsuffix .ps, $(HERD)) $(addsuffix .ps, $(STAMPEDE))
 OBJS=$(addsuffix .png, $(HERD)) $(addsuffix .gif, $(STAMPEDE))
 DIGESTED=$(addsuffix .digested, $(HERD))

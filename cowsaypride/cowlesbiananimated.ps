@@ -1,0 +1,24 @@
+%!PS
+% gs -dNOSAFER -dNOPAUSE -dBATCH -sDEVICE=pngalpha -sOutputFile=cowlesbiananimated%02d.png cowlesbiananimated.ps
+% convert -delay 1 -colors 256 -dispose previous -loop 0 cowlesbiananimated*.png cowlesbiananimated.gif
+
+% https://en.wikipedia.org/wiki/Lesbian_flags
+% seven-stripe variant
+
+(cowsaypride.ps) run
+
+emojisize
+
+/colorprocs [
+    { LESBIANDARKPINK }
+    { LESBIANMEDIUMPINK }
+    { LESBIANLIGHTPINK }
+    { WHITE }
+    { LESBIANLIGHTORANGE }
+    { LESBIANMEDIUMORANGE }
+    { LESBIANDARKORANGE }
+] def
+
+0 1 colorprocs length 1 sub {
+    colorprocs exch cowgayframe
+} for

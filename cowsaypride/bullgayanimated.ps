@@ -1,0 +1,24 @@
+%!PS
+% gs -dNOSAFER -dNOPAUSE -dBATCH -sDEVICE=pngalpha -sOutputFile=bullgayanimated%02d.png bullgayanimated.ps
+% convert -delay 1 -colors 256 -dispose previous -loop 0 bullgayanimated*.png bullgayanimated.gif
+
+% https://en.wikipedia.org/wiki/Gay_men's_flags
+% seven-stripe variant
+
+(cowsaypride.ps) run
+
+emojisize
+
+/colorprocs [
+    { GAYMENDARKBLUE }
+    { GAYMENMEDIUMBLUE }
+    { GAYMENLIGHTBLUE }
+    { WHITE }
+    { GAYMENLIGHTGREEN }
+    { GAYMENMEDIUMGREEN }
+    { GAYMENDARKGREEN }
+] def
+
+0 1 colorprocs length 1 sub {
+    colorprocs exch cowgayframe
+} for

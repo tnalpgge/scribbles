@@ -1,0 +1,25 @@
+%!PS
+% gs -dNOSAFER -dNOPAUSE -dBATCH -sDEVICE=pngalpha -sOutputFile=transcowanimated%02d.png transcowanimated.ps
+% convert -delay 1 -colors 256 -dispose previous -loop 0 transcowanimated*.png transcowanimated.gif
+
+% https://en.wikipedia.org/wiki/Transgender_flag
+% 1999
+
+(cowsaypride.ps) run
+
+emojisize
+
+/colorprocs [
+    { TRANSBLUE }
+    { TRANSPINK }
+    { WHITE }
+    { TRANSPINK }
+    { TRANSBLUE }
+] def
+
+[ { TRANSBLUE } { TRANSPINK } { WHITE } { TRANSPINK } { TRANSBLUE } ] 0 cowgayframe
+[ { TRANSPINK } { WHITE } { TRANSBLUE } { WHITE } { TRANSPINK } ] 0 cowgayframe
+[ { WHITE } { TRANSBLUE } { TRANSPINK } { TRANSBLUE } { WHITE } ] 0 cowgayframe
+[ { TRANSPINK } { TRANSBLUE } { WHITE } { TRANSBLUE } { TRANSPINK } ] 0 cowgayframe
+[ { TRANSBLUE } { WHITE } { TRANSPINK } { WHITE } { TRANSBLUE } ] 0 cowgayframe
+[ { WHITE } { TRANSPINK } { TRANSBLUE } { TRANSPINK } { WHITE } ] 0 cowgayframe
